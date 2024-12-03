@@ -3,7 +3,7 @@
 // http://opensource.org/licenses/MIT>. This file
 // may not be copied, modified, or distributed
 // except according to those terms.
-use rand::Rng;
+use rand::{distributions::Alphanumeric, Rng};
 use std::collections::HashMap;
 use std::ffi::{OsStr, OsString};
 use tempfile::tempdir;
@@ -156,7 +156,7 @@ test_value_sz!(test_os_str_value, "OsStrValue", OsStr::new => OsString);
 fn test_long_string_value() {
     with_key!(key, "LongStringValue" => {
         let name = "RustLongStringVal";
-        let val1 : String = rand::thread_rng().gen_ascii_chars().take(7000).collect();
+        let val1 : String = rand::thread_rng().sample_iter(&Alphanumeric).take(7000).map(char::from).collect();
         key.set_value(name, &val1).unwrap();
         let val2: String = key.get_value(name).unwrap();
         assert_eq!(val1, val2);
@@ -167,7 +167,7 @@ fn test_long_string_value() {
 fn test_long_os_string_value() {
     with_key!(key, "LongOsStringValue" => {
         let name = "RustLongOsStringVal";
-        let val1 = rand::thread_rng().gen_ascii_chars().take(7000).collect::<String>();
+        let val1 = rand::thread_rng().sample_iter(&Alphanumeric).take(7000).map(char::from).collect::<String>();
         let val1 = OsStr::new(&val1);
         key.set_value(name, &val1).unwrap();
         let val2: OsString = key.get_value(name).unwrap();

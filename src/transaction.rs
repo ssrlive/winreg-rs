@@ -13,7 +13,7 @@
 //!use winreg::enums::*;
 //!use winreg::transaction::Transaction;
 //!
-//!fn main() {
+//!{
 //!    let t = Transaction::new().unwrap();
 //!    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
 //!    let (key, _disp) = hkcu.create_subkey_transacted("Software\\RustTransaction", &t).unwrap();
@@ -37,7 +37,7 @@
 //!    }
 //!}
 //!```
-#![cfg(feature = "transactions")]
+
 use std::io;
 use std::ptr;
 use windows_sys::Win32::Foundation;

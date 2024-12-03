@@ -455,9 +455,9 @@ impl serde::Serializer for MapKeySerializer {
         Err(EncoderError::KeyMustBeAString)
     }
 
-    fn collect_str<T: ?Sized>(self, value: &T) -> EncodeResult<String>
+    fn collect_str<T>(self, value: &T) -> EncodeResult<String>
     where
-        T: fmt::Display,
+        T: fmt::Display + ?Sized,
     {
         Ok(value.to_string())
     }
@@ -468,7 +468,7 @@ pub struct StructMapEncoder<'a, Tr: AsRef<Transaction>> {
     is_root: bool,
 }
 
-impl<'a, Tr: AsRef<Transaction>> SerializeStruct for StructMapEncoder<'a, Tr> {
+impl<Tr: AsRef<Transaction>> SerializeStruct for StructMapEncoder<'_, Tr> {
     type Ok = ();
     type Error = EncoderError;
 
@@ -489,7 +489,7 @@ impl<'a, Tr: AsRef<Transaction>> SerializeStruct for StructMapEncoder<'a, Tr> {
     }
 }
 
-impl<'a, Tr: AsRef<Transaction>> SerializeMap for StructMapEncoder<'a, Tr> {
+impl<Tr: AsRef<Transaction>> SerializeMap for StructMapEncoder<'_, Tr> {
     type Ok = ();
     type Error = EncoderError;
 

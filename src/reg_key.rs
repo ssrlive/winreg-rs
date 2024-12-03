@@ -97,7 +97,7 @@ impl RegKey {
         options: u32,
     ) -> io::Result<RegKey> {
         let c_filename = to_utf16(filename);
-        let mut new_hkey: HKEY = 0;
+        let mut new_hkey: HKEY = std::ptr::null_mut();
         match unsafe {
             Registry::RegLoadAppKeyW(c_filename.as_ptr(), &mut new_hkey, perms, options, 0)
         } {
@@ -167,7 +167,7 @@ impl RegKey {
         perms: Registry::REG_SAM_FLAGS,
     ) -> io::Result<RegKey> {
         let c_path = to_utf16(path);
-        let mut new_hkey: HKEY = 0;
+        let mut new_hkey: HKEY = std::ptr::null_mut();
         match unsafe {
             Registry::RegOpenKeyExW(self.hkey, c_path.as_ptr(), 0, perms, &mut new_hkey)
         } {
@@ -195,7 +195,7 @@ impl RegKey {
         perms: Registry::REG_SAM_FLAGS,
     ) -> io::Result<RegKey> {
         let c_path = to_utf16(path);
-        let mut new_hkey: HKEY = 0;
+        let mut new_hkey: HKEY = std::ptr::null_mut();
         match unsafe {
             Registry::RegOpenKeyTransactedW(
                 self.hkey,
@@ -247,7 +247,7 @@ impl RegKey {
         perms: Registry::REG_SAM_FLAGS,
     ) -> io::Result<(RegKey, RegDisposition)> {
         let c_path = to_utf16(path);
-        let mut new_hkey: HKEY = 0;
+        let mut new_hkey: HKEY = std::ptr::null_mut();
         let mut disp_buf: u32 = 0;
         match unsafe {
             Registry::RegCreateKeyExW(
@@ -289,7 +289,7 @@ impl RegKey {
         perms: Registry::REG_SAM_FLAGS,
     ) -> io::Result<(RegKey, RegDisposition)> {
         let c_path = to_utf16(path);
-        let mut new_hkey: HKEY = 0;
+        let mut new_hkey: HKEY = std::ptr::null_mut();
         let mut disp_buf: u32 = 0;
         match unsafe {
             Registry::RegCreateKeyTransactedW(
@@ -608,10 +608,10 @@ impl RegKey {
             match unsafe {
                 Registry::RegQueryValueExW(
                     self.hkey,
-                    c_name.as_ptr() as *const u16,
+                    c_name.as_ptr(),
                     ptr::null_mut(),
                     &mut buf_type,
-                    buf.as_mut_ptr() as *mut u8,
+                    buf.as_mut_ptr(),
                     &mut buf_len,
                 )
             } {
@@ -687,7 +687,7 @@ impl RegKey {
                 c_name.as_ptr(),
                 0,
                 t,
-                value.bytes.as_ptr() as *const u8,
+                value.bytes.as_ptr(),
                 value.bytes.len() as u32,
             )
         } {
@@ -914,7 +914,7 @@ impl RegKey {
                     &mut name_len,
                     ptr::null_mut(), // reserved
                     &mut buf_type,
-                    buf.as_mut_ptr() as *mut u8,
+                    buf.as_mut_ptr(),
                     &mut buf_len,
                 )
             } {
@@ -960,7 +960,7 @@ pub struct EnumKeys<'key> {
     index: u32,
 }
 
-impl<'key> Iterator for EnumKeys<'key> {
+impl Iterator for EnumKeys<'_> {
     type Item = io::Result<String>;
 
     fn next(&mut self) -> Option<io::Result<String>> {
@@ -985,7 +985,7 @@ pub struct EnumValues<'key> {
     index: u32,
 }
 
-impl<'key> Iterator for EnumValues<'key> {
+impl Iterator for EnumValues<'_> {
     type Item = io::Result<(String, RegValue)>;
 
     fn next(&mut self) -> Option<io::Result<(String, RegValue)>> {
