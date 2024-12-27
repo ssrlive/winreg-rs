@@ -11,7 +11,7 @@ winreg2
 [docsrs-image]: https://docs.rs/winreg2/badge.svg
 [docsrs]: https://docs.rs/winreg2
 
-Rust bindings to MS Windows Registry API. Work in progress.
+Rust bindings to MS Windows Registry API. Under active maintenance...
 
 Current features:
 * Basic registry operations:
@@ -36,7 +36,7 @@ Current features:
 ```toml
 # Cargo.toml
 [dependencies]
-winreg2 = "0.52"
+winreg2 = "0.53"
 ```
 
 ```rust
@@ -138,7 +138,7 @@ fn main() -> io::Result<()> {
 ```toml
 # Cargo.toml
 [dependencies]
-winreg2 = { version = "0.52", features = ["transactions"] }
+winreg2 = { version = "0.53", features = ["transactions"] }
 ```
 
 ```rust
@@ -179,7 +179,7 @@ fn main() -> io::Result<()> {
 ```toml
 # Cargo.toml
 [dependencies]
-winreg2 = { version = "0.52", features = ["serialization-serde"] }
+winreg2 = { version = "0.53", features = ["serialization-serde"] }
 serde = "1"
 serde_derive = "1"
 ```

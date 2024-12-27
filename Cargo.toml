@@ -1,7 +1,7 @@
 [package]
 name = "winreg2"
 edition = "2021"
-version = "0.53.0"
+version = "0.53.1"
 authors = ["ssrlive", "Igor Shaula <gentoo90@gmail.com>"]
 license = "MIT"
 description = "Rust bindings to MS Windows Registry API"
