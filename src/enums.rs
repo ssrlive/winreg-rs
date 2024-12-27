@@ -24,6 +24,14 @@ macro_rules! winapi_enum{
     )
 }
 
+winapi_enum!(NotifyFilter, "Enumeration of possible changes that should be reported in RegNotifyChangeKeyValue" => [
+    REG_NOTIFY_CHANGE_NAME ,
+    REG_NOTIFY_CHANGE_ATTRIBUTES,
+    REG_NOTIFY_CHANGE_LAST_SET,
+    REG_NOTIFY_CHANGE_SECURITY,
+    REG_NOTIFY_THREAD_AGNOSTIC
+]);
+
 winapi_enum!(RegType, "Enumeration of possible registry value types" => [
 REG_NONE,
 REG_SZ,

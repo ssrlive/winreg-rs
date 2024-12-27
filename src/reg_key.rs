@@ -125,6 +125,30 @@ impl RegKey {
         self.hkey
     }
 
+    /// Watches for changes in the specified registry key
+    /// # Safety
+    /// This function is unsafe becasue it calls the 'RegNotifyChangeKeyValue' function, which is an FFI call.
+    pub fn notify_change_key_value(
+        &self,
+        should_watch_subtree: bool,
+        notify_filter: enums::NotifyFilter,
+        is_async: bool,
+    ) -> io::Result<()> {
+        match unsafe {
+            Registry::RegNotifyChangeKeyValue(
+                self.hkey,
+                should_watch_subtree as i32,
+                notify_filter as u32,
+                std::ptr::null_mut(),
+                is_async as i32,
+            )
+        } {
+            0 => Ok(()),
+            // TODO from raw os as error?
+            err => werr!(err),
+        }
+    }
+
     /// Open subkey with `KEY_READ` permissions.
     /// Will open another handle to itself if `path` is an empty string.
     /// To open with different permissions use `open_subkey_with_flags`.
