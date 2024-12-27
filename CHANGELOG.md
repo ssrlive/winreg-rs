@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.53.0
+* Rename crate name from `winreg` to `winreg2`
+
 ## 0.52.0
 * Breaking change: `.commit()` and `.rollback()` now consume the transaction ([#62](https://github.com/gentoo90/winreg-rs/issues/62))
 * Add `RegKey::rename_subkey()` method ([#58](https://github.com/gentoo90/winreg-rs/issues/58))

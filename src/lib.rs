@@ -13,14 +13,14 @@
 //!```toml,ignore
 //!# Cargo.toml
 //![dependencies]
-//!winreg = "0.52"
+//!winreg2 = "0.52"
 //!```
 //!
 //!```no_run
 //!use std::io;
 //!use std::path::Path;
-//!use winreg::enums::*;
-//!use winreg::RegKey;
+//!use winreg2::enums::*;
+//!use winreg2::RegKey;
 //!
 //!fn main() -> io::Result<()> {
 //!    println!("Reading some system info...");
@@ -37,7 +37,7 @@
 //!        mt.wYear, mt.wMonth, mt.wDay, mt.wHour, mt.wMinute, mt.wSecond
 //!    );
 //!
-//!    // enable `chrono` feature on `winreg` to make this work
+//!    // enable `chrono` feature on `winreg2` to make this work
 //!    // println!(
 //!    //     "last_write_time as chrono::NaiveDateTime = {}",
 //!    //     info.get_last_write_time_chrono()
@@ -88,8 +88,8 @@
 //!
 //!```no_run
 //!use std::io;
-//!use winreg::RegKey;
-//!use winreg::enums::*;
+//!use winreg2::RegKey;
+//!use winreg2::enums::*;
 //!
 //!fn main() -> io::Result<()> {
 //!    println!("File extensions, registered in system:");
@@ -112,7 +112,7 @@
 //!
 cfg_if::cfg_if! {
     if #[cfg(not(windows))] {
-        compile_error!("OS not supported. if your application is multi-platform, use `[target.'cfg(windows)'.dependencies] winreg = \"...\"`");
+        compile_error!("OS not supported. if your application is multi-platform, use `[target.'cfg(windows)'.dependencies] winreg2 = \"...\"`");
     } else {
         pub use crate::reg_key::{EnumKeys, EnumValues, RegKey, HKEY};
         pub use crate::reg_key_metadata::RegKeyMetadata;

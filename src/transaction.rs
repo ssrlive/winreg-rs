@@ -9,9 +9,9 @@
 //!
 //!```no_run
 //!use std::io;
-//!use winreg::RegKey;
-//!use winreg::enums::*;
-//!use winreg::transaction::Transaction;
+//!use winreg2::RegKey;
+//!use winreg2::enums::*;
+//!use winreg2::transaction::Transaction;
 //!
 //!{
 //!    let t = Transaction::new().unwrap();

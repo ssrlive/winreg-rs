@@ -1,15 +1,15 @@
-winreg
+winreg2
 [![Github Actions][actions-image]][actions]
-[![Winreg on crates.io][cratesio-image]][cratesio]
-[![Winreg on docs.rs][docsrs-image]][docsrs]
+[![Winreg2 on crates.io][cratesio-image]][cratesio]
+[![Winreg2 on docs.rs][docsrs-image]][docsrs]
 ======
 
-[actions-image]: https://github.com/gentoo90/winreg-rs/actions/workflows/ci.yaml/badge.svg
-[actions]: https://github.com/gentoo90/winreg-rs/actions
-[cratesio-image]: https://img.shields.io/crates/v/winreg.svg
-[cratesio]: https://crates.io/crates/winreg
-[docsrs-image]: https://docs.rs/winreg/badge.svg
-[docsrs]: https://docs.rs/winreg
+[actions-image]: https://github.com/ssrlive/winreg-rs/actions/workflows/ci.yaml/badge.svg
+[actions]: https://github.com/ssrlive/winreg-rs/actions
+[cratesio-image]: https://img.shields.io/crates/v/winreg2.svg
+[cratesio]: https://crates.io/crates/winreg2
+[docsrs-image]: https://docs.rs/winreg2/badge.svg
+[docsrs]: https://docs.rs/winreg2
 
 Rust bindings to MS Windows Registry API. Work in progress.
 
@@ -36,14 +36,14 @@ Current features:
 ```toml
 # Cargo.toml
 [dependencies]
-winreg = "0.52"
+winreg2 = "0.52"
 ```
 
 ```rust
 use std::io;
 use std::path::Path;
-use winreg::enums::*;
-use winreg::RegKey;
+use winreg2::enums::*;
+use winreg2::RegKey;
 
 fn main() -> io::Result<()> {
     println!("Reading some system info...");
@@ -60,7 +60,7 @@ fn main() -> io::Result<()> {
         mt.wYear, mt.wMonth, mt.wDay, mt.wHour, mt.wMinute, mt.wSecond
     );
 
-    // enable `chrono` feature on `winreg` to make this work
+    // enable `chrono` feature on `winreg2` to make this work
     // println!(
     //     "last_write_time as chrono::NaiveDateTime = {}",
     //     info.get_last_write_time_chrono()
@@ -111,8 +111,8 @@ fn main() -> io::Result<()> {
 
 ```rust
 use std::io;
-use winreg::RegKey;
-use winreg::enums::*;
+use winreg2::RegKey;
+use winreg2::enums::*;
 
 fn main() -> io::Result<()> {
     println!("File extensions, registered in system:");
@@ -138,14 +138,14 @@ fn main() -> io::Result<()> {
 ```toml
 # Cargo.toml
 [dependencies]
-winreg = { version = "0.52", features = ["transactions"] }
+winreg2 = { version = "0.52", features = ["transactions"] }
 ```
 
 ```rust
 use std::io;
-use winreg::RegKey;
-use winreg::enums::*;
-use winreg::transaction::Transaction;
+use winreg2::RegKey;
+use winreg2::enums::*;
+use winreg2::transaction::Transaction;
 
 fn main() -> io::Result<()> {
     let t = Transaction::new()?;
@@ -179,7 +179,7 @@ fn main() -> io::Result<()> {
 ```toml
 # Cargo.toml
 [dependencies]
-winreg = { version = "0.52", features = ["serialization-serde"] }
+winreg2 = { version = "0.52", features = ["serialization-serde"] }
 serde = "1"
 serde_derive = "1"
 ```
@@ -188,7 +188,7 @@ serde_derive = "1"
 use serde_derive::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::error::Error;
-use winreg::enums::*;
+use winreg2::enums::*;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
 struct Coords {
@@ -231,7 +231,7 @@ struct Test {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let hkcu = winreg::RegKey::predef(HKEY_CURRENT_USER);
+    let hkcu = winreg2::RegKey::predef(HKEY_CURRENT_USER);
     let (key, _disp) = hkcu.create_subkey("Software\\RustEncode")?;
 
     let mut map = HashMap::new();

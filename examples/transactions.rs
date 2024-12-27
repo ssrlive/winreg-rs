@@ -4,9 +4,9 @@
 // may not be copied, modified, or distributed
 // except according to those terms.
 use std::io;
-use winreg::enums::*;
-use winreg::transaction::Transaction;
-use winreg::RegKey;
+use winreg2::enums::*;
+use winreg2::transaction::Transaction;
+use winreg2::RegKey;
 
 fn main() -> io::Result<()> {
     let t = Transaction::new()?;

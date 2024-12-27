@@ -8,9 +8,9 @@ use std::collections::HashMap;
 use std::ffi::{OsStr, OsString};
 use tempfile::tempdir;
 use windows_sys::Win32::Foundation;
-use winreg::enums::*;
-use winreg::types::FromRegValue;
-use winreg::{RegKey, RegValue};
+use winreg2::enums::*;
+use winreg2::types::FromRegValue;
+use winreg2::{RegKey, RegValue};
 
 mod common;
 

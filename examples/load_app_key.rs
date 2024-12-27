@@ -4,8 +4,8 @@
 // may not be copied, modified, or distributed
 // except according to those terms.
 use std::io;
-use winreg::enums::*;
-use winreg::RegKey;
+use winreg2::enums::*;
+use winreg2::RegKey;
 
 fn main() -> io::Result<()> {
     {

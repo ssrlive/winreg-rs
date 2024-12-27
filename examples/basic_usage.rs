@@ -5,8 +5,8 @@
 // except according to those terms.
 use std::io;
 use std::path::Path;
-use winreg::enums::*;
-use winreg::RegKey;
+use winreg2::enums::*;
+use winreg2::RegKey;
 
 fn main() -> io::Result<()> {
     println!("Reading some system info...");

@@ -6,7 +6,7 @@
 use serde_derive::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::error::Error;
-use winreg::enums::*;
+use winreg2::enums::*;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
 struct Coords {
@@ -51,7 +51,7 @@ struct Test {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let hkcu = winreg::RegKey::predef(HKEY_CURRENT_USER);
+    let hkcu = winreg2::RegKey::predef(HKEY_CURRENT_USER);
     let (key, _disp) = hkcu.create_subkey("Software\\RustEncode")?;
 
     let mut map = HashMap::new();
