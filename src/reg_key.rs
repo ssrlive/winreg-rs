@@ -819,6 +819,7 @@ impl RegKey {
     #[cfg(feature = "serialization-serde")]
     pub fn encode<T: serde::Serialize>(&self, value: &T) -> crate::encoder::EncodeResult<()> {
         let mut encoder = crate::encoder::Encoder::from_key(self)?;
+        self.delete_subkey_all("").ok();
         value.serialize(&mut encoder)?;
         encoder.commit()
     }

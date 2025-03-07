@@ -171,3 +171,29 @@ fn test_serialization_all_transacted() {
         assert_eq!(v2, v1);
     });
 }
+
+#[test]
+fn mytst() {
+    let v1 = Rectangle {
+        coords: Some(Coords { x: 55, y: 77 }),
+        size: Size { w: 500, h: 300 },
+    };
+
+    let hkcu = winreg::RegKey::predef(winreg::enums::HKEY_CURRENT_USER);
+    let path = "Software\\mytest";
+    let (key, _) = hkcu.create_subkey(path).unwrap();
+
+    key.encode(&v1).unwrap();
+
+    let v3: Rectangle = key.decode().unwrap();
+    assert_eq!(v3, v1);
+
+    let v2 = Rectangle {
+        coords: None,
+        size: Size { w: 900, h: 40 },
+    };
+    key.encode(&v2).unwrap();
+
+    let v3: Rectangle = key.decode().unwrap();
+    assert_eq!(v3, v2);
+}
